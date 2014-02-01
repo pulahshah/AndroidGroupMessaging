@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.groupmessaging.R;
-import com.parse.ParseUser;
+import com.example.groupmessaging.models.AccountManager;
 
 public class ConversationListActivity extends Activity {
 
@@ -16,7 +16,7 @@ public class ConversationListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversation_list);
 		TextView tvUsername = (TextView)findViewById(R.id.tvUsername);
-		tvUsername.setText(ParseUser.getCurrentUser().getUsername());
+		tvUsername.setText(AccountManager.getInstance().getCurrentUser().toString());
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class ConversationListActivity extends Activity {
 	}
 	
 	public void onActionSignOut(MenuItem mi) {
-		ParseUser.logOut();
+		AccountManager.getInstance().logout();
 		finish();
 	}
 

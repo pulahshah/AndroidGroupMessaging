@@ -9,14 +9,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.groupmessaging.R;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
+import com.example.groupmessaging.models.AccountManager;
+import com.example.groupmessaging.models.AccountManager.SignUpCallback;
+import com.example.groupmessaging.models.AccountManager.SignUpError;
+import com.firebase.simplelogin.User;
 
 public class SignUpActivity extends Activity {
 	private EditText etUsername;
 	private EditText etPassword;
 	private EditText etConfirmPassowrd;
+	
+	public static final String RESPONSE_KEY_USERNAME = "u";
+	public static final String RESPONSE_KEY_PASSWORD = "p";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +43,23 @@ public class SignUpActivity extends Activity {
 	}
 	
 	public void onSignUp(View v) {
-		ParseUser user = new ParseUser();
-		user.setUsername(etUsername.getText().toString());
-		user.setPassword(etPassword.getText().toString());
-		
-		user.signUpInBackground(new SignUpCallback() {
+		final String username = etUsername.getText().toString();
+		final String password = etPassword.getText().toString();
+		AccountManager.getInstance().signUp(username, password, new SignUpCallback() {
 			
 			@Override
-			public void done(ParseException e) {
-				if (e != null) {
-					Toast.makeText(SignUpActivity.this, "Unable to signup - " + e.toString(), Toast.LENGTH_LONG).show();
-					return;
-				}
-				
-				setResult(RESULT_OK);
+			public void onSignUpSuccess(User user) {
+				Intent i = new Intent();
+				i.putExtra(RESPONSE_KEY_USERNAME, username);
+				i.putExtra(RESPONSE_KEY_PASSWORD, password);
+				setResult(RESULT_OK, i);
 				finish();
+			}
+			
+			@Override
+			public void onSignUpFailure(SignUpError error) {
+				Toast.makeText(SignUpActivity.this, error.message(), Toast.LENGTH_LONG).show();
+				
 			}
 		});
 	}
