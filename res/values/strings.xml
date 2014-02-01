@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Group Messenger</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_conversation_list">Conversations</string>
+
+</resources>
