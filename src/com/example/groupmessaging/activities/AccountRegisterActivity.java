@@ -8,9 +8,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.groupmessaging.R;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
+import com.example.groupmessaging.models.AccountManager;
+import com.example.groupmessaging.models.AccountManager.LoginCallback;
+import com.example.groupmessaging.models.AccountManager.LoginError;
+import com.example.groupmessaging.models.AccountManager.StartCallback;
+import com.firebase.simplelogin.User;
 
 public class AccountRegisterActivity extends Activity
 {
@@ -32,9 +34,18 @@ public class AccountRegisterActivity extends Activity
     protected void onResume() {
     	// TODO Auto-generated method stub
     	super.onResume();
-    	if (ParseUser.getCurrentUser() != null) {
-    		showConversations();
-    	}
+    	AccountManager.getInstance().start(new StartCallback() {
+			
+			@Override
+			public void onLoggedIn(User user) {
+				showConversations();
+			}
+			
+			@Override
+			public void onLoggedOut() {
+				
+			}
+		});
     }
     
     public void onSignUp(View v) {
@@ -43,26 +54,35 @@ public class AccountRegisterActivity extends Activity
 	}
     
     public void onSignIn(View v) {
-		ParseUser.logInInBackground(etUsername.getText().toString(), etPassword.getText().toString(), new LogInCallback() {
+		String username = etUsername.getText().toString();
+		String password = etPassword.getText().toString();
+		signIn(username, password);
+	}
+    
+    public void signIn(String username, String password) {
+    	AccountManager.getInstance().login(username, password, new LoginCallback() {
 			
 			@Override
-			public void done(ParseUser user, ParseException e) {
-				if (e != null) {
-					Toast.makeText(AccountRegisterActivity.this, "Unable to sign-in" + e.toString(), Toast.LENGTH_LONG).show();
-					return;
-				}
-				
+			public void onLoginSuccess(User user) {
 				showConversations();
+				
+			}
+			
+			@Override
+			public void onLoginFailure(LoginError error) {
+				Toast.makeText(AccountRegisterActivity.this, error.message(), Toast.LENGTH_LONG).show();
 			}
 		});
-	}
+    }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (requestCode == REQUEST_SIGNUP) {
-    		if (resultCode == RESULT_OK)
-    			showConversations();
-    		return;
+    		if (resultCode == RESULT_OK) {
+    			signIn(data.getStringExtra(SignUpActivity.RESPONSE_KEY_USERNAME),
+    					data.getStringExtra(SignUpActivity.RESPONSE_KEY_PASSWORD));
+    			return;
+    		}
     	}
     	super.onActivityResult(requestCode, resultCode, data);
     }
@@ -70,6 +90,5 @@ public class AccountRegisterActivity extends Activity
     protected void showConversations() {
     	Intent i = new Intent(this, ConversationListActivity.class);
     	startActivity(i);
-		
 	}
 }
