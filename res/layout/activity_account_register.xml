@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="52dp"
-        android:hint="Username"
+        android:hint="@string/username"
         android:ems="10" >
         <requestFocus />
      </EditText>
@@ -27,7 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/etUsername"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword" >
         
     </EditText>
@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:onClick="onSignIn"
-        android:text="Sign In" />
+        android:text="@string/sign_in" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -50,7 +50,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
         android:onClick="onSignUp"
-        android:text="Sign Up" />
+        android:text="@string/sign_up" />
     
 </RelativeLayout>
-
