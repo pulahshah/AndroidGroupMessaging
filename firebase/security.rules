@@ -19,7 +19,24 @@
             "$group" : {
               ".read": "auth != null && !data.exists()",
               ".write": "auth.id == $user || root.child('users/'+$user+'/private/contacts').hasChild(auth.id)",
-              ".validate": "root.child('groups').hasChild($group)"
+              ".validate": "root.child('groups').hasChild($group)",
+              
+              "name": {
+              	".validate": "newData.isString()"
+              },
+              
+              "latestMessage": {
+              	"sender": {
+                  // sender should be one of the members of the group
+                    ".validate": "newData.isString()"
+                  },
+                  "text": {
+                    ".validate": "newData.isString()"
+                  },
+                  "timestamp": {
+                    ".validate": "newData.isNumber()"
+                  }
+              }
             }
           }
         }

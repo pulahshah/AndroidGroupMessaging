@@ -1,29 +1,23 @@
 package com.example.groupmessaging.models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Group {
-	private ArrayList<Message> messages;
-	private HashMap<String, Integer> users;
+	private String name;
+	private Message lastMessage;
 	
-	public Group() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public ArrayList<Message> getMessages() {
-		return messages;
+	public String getName() {
+		return name;
 	}
 	
-	public void setMessages(ArrayList<Message> messages) {
-		this.messages = messages;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	public HashMap<String, Integer> getUsers() {
-		return users;
+	public Message getLastMessage() {
+		return lastMessage;
 	}
 	
-	public void setUsers(HashMap<String, Integer> users) {
-		this.users = users;
+	public void setLastMessage(Message lastMessage) {
+		this.lastMessage = lastMessage;
 	}
 }

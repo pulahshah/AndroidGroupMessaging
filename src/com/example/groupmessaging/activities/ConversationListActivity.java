@@ -36,6 +36,8 @@ public class ConversationListActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		adapter = new GroupListAdapter(android.R.layout.simple_list_item_1, this);
+		lvGroups.setAdapter(adapter);
 	}
 	
 	@Override
