@@ -1,22 +1,29 @@
 package com.example.groupmessaging.activities;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.example.groupmessaging.R;
+import com.example.groupmessaging.adapters.GroupListAdapter;
 import com.example.groupmessaging.models.AccountManager;
+import com.example.groupmessaging.restapi.GroupMessagingClient;
 
 public class ConversationListActivity extends Activity {
-
-	@Override
+	private static final String TAG = "ConversationListActivity";
+	private ListView lvGroups;
+	private int group = 0;
+	private GroupListAdapter adapter;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conversation_list);
-		TextView tvUsername = (TextView)findViewById(R.id.tvUsername);
-		tvUsername.setText(AccountManager.getInstance().getCurrentUser().toString());
+		lvGroups = (ListView)findViewById(R.id.lvGroups);
 	}
 
 	@Override
@@ -26,9 +33,29 @@ public class ConversationListActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		adapter = new GroupListAdapter(android.R.layout.simple_list_item_1, this);
+		lvGroups.setAdapter(adapter);
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+	
 	public void onActionSignOut(MenuItem mi) {
 		AccountManager.getInstance().logout();
 		finish();
+	}
+	
+	public void onActionNewGroup(MenuItem mi) {
+		ArrayList<String>users = new ArrayList<String>();
+		users.add("2");
+		
+		String groupID = GroupMessagingClient.createGroup(users);
+		Log.d(TAG, "Created group with ID " + groupID);
 	}
 
 }

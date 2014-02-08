@@ -3,7 +3,7 @@
 
     <string name="app_name">Group Messenger</string>
     <string name="title_activity_sign_up">Sign Up</string>
-    <string name="action_sign_out">Sign Out</string>
+    
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="username">Username</string>
@@ -14,4 +14,6 @@
     <string name="title_activity_conversation_list">Conversations</string>
     <string name="hello_world">Hello world!</string>
 
+    <string name="action_sign_out">Sign Out</string>
+    <string name="action_new_group">New Group</string>
 </resources>

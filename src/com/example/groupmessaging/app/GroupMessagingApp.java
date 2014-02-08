@@ -18,6 +18,7 @@ public class GroupMessagingApp extends com.activeandroid.app.Application {
         GroupMessagingApp.context = this;
         fbContext = new Firebase("https://resplendent-fire-8448.firebaseio.com");
         AccountManager.initialize(this, fbContext);
+        GroupMessagingClient.initialize(this, fbContext);
         // Create global configuration and initialize ImageLoader with this configuration
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
         		cacheInMemory().cacheOnDisc().build();
@@ -25,10 +26,6 @@ public class GroupMessagingApp extends com.activeandroid.app.Application {
             .defaultDisplayImageOptions(defaultOptions)
             .build();
         ImageLoader.getInstance().init(config);
-    }
-    
-    public static GroupMessagingClient getRestClient() {
-    	return (GroupMessagingClient) GroupMessagingClient.getInstance(GroupMessagingApp.context);
     }
 
 }

@@ -126,7 +126,7 @@ public class AccountManager {
 			      return;
 			    }
 			 
-			     // User Created
+			     // GMUser Created
 			    listener.onSignUpSuccess(user);
 			  }
 			});
