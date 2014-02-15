@@ -52,7 +52,7 @@ public class ConversationListActivity extends Activity {
 	}
 	
 	public void onActionNewGroup(MenuItem mi) {
-		Intent i = new Intent(this, ConversationComposeActivity.class);
+		Intent i = new Intent(this, CreateGroupActivity.class);
 		startActivity(i);
 	}
 

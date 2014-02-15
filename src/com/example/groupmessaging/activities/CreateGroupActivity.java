@@ -13,7 +13,7 @@ import com.example.groupmessaging.adapters.ContactListAdapter;
 import com.example.groupmessaging.restapi.GroupMessagingClient;
 import com.example.groupmessaging.view.ContactsCompletionView;
 
-public class ConversationComposeActivity extends Activity {
+public class CreateGroupActivity extends Activity {
 	private ContactsCompletionView mactvRecipients;
 	private ContactListAdapter adapter;
 	private EditText etGroupName;
