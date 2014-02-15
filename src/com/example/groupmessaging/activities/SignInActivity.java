@@ -19,9 +19,9 @@ import com.firebase.client.Firebase.AuthListener;
 import com.firebase.client.FirebaseError;
 import com.firebase.simplelogin.User;
 
-public class AccountRegisterActivity extends Activity
+public class SignInActivity extends Activity
 {
-	private static final String TAG = "AccountRegisterActivity";
+	private static final String TAG = "SignInActivity";
 	
 	private EditText etUsername;
 	private EditText etPassword;
@@ -79,7 +79,7 @@ public class AccountRegisterActivity extends Activity
 			
 			@Override
 			public void onLoginFailure(LoginError error) {
-				Toast.makeText(AccountRegisterActivity.this, error.message(), Toast.LENGTH_LONG).show();
+				Toast.makeText(SignInActivity.this, error.message(), Toast.LENGTH_LONG).show();
 			}
 		});
     }
