@@ -34,7 +34,7 @@ public class SignInActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_register);
+        setContentView(R.layout.activity_sign_in);
         etUsername = (EditText)findViewById(R.id.etUsername);
         etPassword = (EditText)findViewById(R.id.etPassword);
         updateUserInfo = false;
@@ -102,7 +102,7 @@ public class SignInActivity extends Activity
     }
     
     protected void showConversations() {
-    	Intent i = new Intent(this, ConversationListActivity.class);
+    	Intent i = new Intent(this, ListGroupActivity.class);
     	startActivity(i);
 	}
     

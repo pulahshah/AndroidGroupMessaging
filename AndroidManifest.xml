@@ -39,7 +39,7 @@
             android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
-            android:name="com.example.groupmessaging.activities.ConversationListActivity"
+            android:name="com.example.groupmessaging.activities.ListGroupActivity"
             android:label="@string/title_activity_conversation_list" >
         </activity>
         <activity

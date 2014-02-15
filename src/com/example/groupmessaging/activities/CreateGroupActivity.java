@@ -23,7 +23,7 @@ public class CreateGroupActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_conversation_compose);
+		setContentView(R.layout.activity_create_group);
 		mactvRecipients = (ContactsCompletionView)findViewById(R.id.mactvRecipients);
 		etGroupName = (EditText)findViewById(R.id.etGroupName);
 		etMessage = (EditText)findViewById(R.id.etMessage);
