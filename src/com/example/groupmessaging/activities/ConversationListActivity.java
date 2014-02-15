@@ -3,6 +3,7 @@ package com.example.groupmessaging.activities;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -51,11 +52,8 @@ public class ConversationListActivity extends Activity {
 	}
 	
 	public void onActionNewGroup(MenuItem mi) {
-		ArrayList<String>users = new ArrayList<String>();
-		users.add("2");
-		
-		String groupID = GroupMessagingClient.createGroup(users);
-		Log.d(TAG, "Created group with ID " + groupID);
+		Intent i = new Intent(this, ConversationComposeActivity.class);
+		startActivity(i);
 	}
 
 }

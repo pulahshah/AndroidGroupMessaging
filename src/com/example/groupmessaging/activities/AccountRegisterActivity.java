@@ -1,5 +1,6 @@
 package com.example.groupmessaging.activities;
 
+import android.R.bool;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class AccountRegisterActivity extends Activity
 	
 	private EditText etUsername;
 	private EditText etPassword;
+	private String firstName, lastName;
+	private boolean updateUserInfo;
 	
 	private static final int REQUEST_SIGNUP = 1;
     /** Called when the activity is first created. */
@@ -34,6 +37,7 @@ public class AccountRegisterActivity extends Activity
         setContentView(R.layout.activity_account_register);
         etUsername = (EditText)findViewById(R.id.etUsername);
         etPassword = (EditText)findViewById(R.id.etPassword);
+        updateUserInfo = false;
     }
     
     @Override
@@ -44,25 +48,7 @@ public class AccountRegisterActivity extends Activity
 			
 			@Override
 			public void onLoggedIn(User user) {
-				Log.d(TAG, "GMUser info: " + user.getUserId() + " " + user.getEmail());
-				GroupMessagingClient.auth(user, new AuthListener() {
-					
-					@Override
-					public void onAuthSuccess(Object arg0) {
-						showConversations();
-					}
-					
-					@Override
-					public void onAuthRevoked(FirebaseError arg0) {
-						Log.e(TAG, "Auth revoked: "+ arg0.toString());
-					}
-					
-					@Override
-					public void onAuthError(FirebaseError arg0) {
-						Log.e(TAG, "Auth error: "+ arg0.toString());
-					}
-				});
-				
+				onUserSignedIn(user);
 			}
 			
 			@Override
@@ -88,8 +74,7 @@ public class AccountRegisterActivity extends Activity
 			
 			@Override
 			public void onLoginSuccess(User user) {
-				showConversations();
-				
+				onUserSignedIn(user);
 			}
 			
 			@Override
@@ -103,6 +88,11 @@ public class AccountRegisterActivity extends Activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (requestCode == REQUEST_SIGNUP) {
     		if (resultCode == RESULT_OK) {
+    			firstName = data.getStringExtra(SignUpActivity.RESPONSE_KEY_FIRSTNAME);
+    			lastName = data.getStringExtra(SignUpActivity.RESPONSE_KEY_LASTNAME);
+    			if (firstName != null && firstName.length() > 0)
+    				updateUserInfo = true;
+    			
     			signIn(data.getStringExtra(SignUpActivity.RESPONSE_KEY_USERNAME),
     					data.getStringExtra(SignUpActivity.RESPONSE_KEY_PASSWORD));
     			return;
@@ -114,5 +104,33 @@ public class AccountRegisterActivity extends Activity
     protected void showConversations() {
     	Intent i = new Intent(this, ConversationListActivity.class);
     	startActivity(i);
+	}
+    
+    protected void updateUserInfo() {
+		GroupMessagingClient.updateUserInfo(firstName, lastName);
+		updateUserInfo = false;
+	}
+    
+    protected void onUserSignedIn(User user) {
+    	Log.d(TAG, "GMUser info: " + user.getUserId() + " " + user.getEmail());
+		GroupMessagingClient.auth(user, new AuthListener() {
+			
+			@Override
+			public void onAuthSuccess(Object arg0) {
+				if (updateUserInfo)
+					updateUserInfo();
+				showConversations();
+			}
+			
+			@Override
+			public void onAuthRevoked(FirebaseError arg0) {
+				Log.e(TAG, "Auth revoked: "+ arg0.toString());
+			}
+			
+			@Override
+			public void onAuthError(FirebaseError arg0) {
+				Log.e(TAG, "Auth error: "+ arg0.toString());
+			}
+		});
 	}
 }
