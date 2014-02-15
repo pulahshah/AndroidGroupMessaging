@@ -5,7 +5,8 @@
           
           //Only user can write here
           "private": {
-            ".write": "auth.id == $user",
+            ".read": "auth.uid == $user",
+            ".write": "auth.uid == $user",
             "contacts": {
               "$contact" : {
                   ".validate": "newData.isString()"
@@ -15,10 +16,10 @@
           
           "groups": {
             //Only user can read all his groups
-            ".read": "auth.id == $user",
+            ".read": "auth.uid == $user",
             "$group" : {
               ".read": "auth != null && !data.exists()",
-              ".write": "auth.id == $user || root.child('users/'+$user+'/private/contacts').hasChild(auth.id)",
+              ".write": "auth.uid == $user || root.child('users/'+$user+'/private/contacts').hasChild(auth.uid)",
               ".validate": "root.child('groups').hasChild($group)",
               
               "name": {
@@ -49,13 +50,13 @@
             // if the group hasn't been created yet, we allow read so there is a way 
             // to check this and create it; if it already exists, then authenticated 
             // user (specified by auth.id) must be in $key/users
-            ".read": "auth != null && (!data.exists() || data.child('users').hasChild(auth.id))",
+            ".read": "auth != null && (!data.exists() || data.child('users').hasChild(auth.uid))",
         
             // list of users authorized to participate in group
             "users": {
                 // if the list doesn't exist, anybody can create it
                 // if it already exists, only users already in the list may modify it
-                ".write": "!data.exists() || data.hasChild(auth.id)",
+                ".write": "!data.exists() || data.hasChild(auth.uid)",
                 "$acc": {
                   // for now the value is just a 1, later it could be a read/write/super privilege
                   ".validate": "newData.isNumber()"
@@ -66,7 +67,7 @@
             "last": {
                 "$acc": {
                   // may only written by the authenticated user and if user is in $key/users
-                  ".write": "$acc === auth.id && root.child('groups/'+$key+'/users').hasChild($acc)",
+                  ".write": "$acc === auth.uid && root.child('groups/'+$key+'/users').hasChild($acc)",
                   ".validate": "newData.isNumber()"
                 }
             },
@@ -75,11 +76,11 @@
                 "$msg": {
                   // to write a message, it must have all three fields (usr, ts, and msg)
                   // and the person writing must be in $key/users
-                  ".write": "root.child('groups/'+$key+'/users').hasChild(auth.id)",
+                  ".write": "root.child('groups/'+$key+'/users').hasChild(auth.uid)",
                   ".validate":"newData.hasChildren(['timestamp', 'sender', 'text'])",
                   "sender": {
                   // may only create messages from myself
-                    ".validate": "newData.val() === auth.id"
+                    ".validate": "newData.val() === auth.uid"
                   },
                   "text": {
                     ".validate": "newData.isString()"
