@@ -1,35 +1,50 @@
 package com.example.groupmessaging.activities;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.groupmessaging.R;
 import com.example.groupmessaging.adapters.GroupListAdapter;
 import com.example.groupmessaging.models.AccountManager;
-import com.example.groupmessaging.restapi.GroupMessagingClient;
+import com.example.groupmessaging.models.Group;
 
-public class ConversationListActivity extends Activity {
-	private static final String TAG = "ConversationListActivity";
+public class ListGroupActivity extends Activity {
+	private static final String TAG = "ListGroupActivity";
 	private ListView lvGroups;
-	private int group = 0;
 	private GroupListAdapter adapter;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_conversation_list);
+		setContentView(R.layout.activity_list_group);
 		lvGroups = (ListView)findViewById(R.id.lvGroups);
+		lvGroups.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				ListGroupActivity.this.showGroup((Group)adapter.getItem(position));
+			}
+			
+		});
+	}
+
+	protected void showGroup(Group item) {
+		Intent i = new Intent(this, MessagesActivity.class);
+		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPID, item.getId());
+		startActivity(i);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.conversation_list, menu);
+		getMenuInflater().inflate(R.menu.list_group, menu);
 		return true;
 	}
 	
@@ -51,11 +66,8 @@ public class ConversationListActivity extends Activity {
 	}
 	
 	public void onActionNewGroup(MenuItem mi) {
-		ArrayList<String>users = new ArrayList<String>();
-		users.add("2");
-		
-		String groupID = GroupMessagingClient.createGroup(users);
-		Log.d(TAG, "Created group with ID " + groupID);
+		Intent i = new Intent(this, CreateGroupActivity.class);
+		startActivity(i);
 	}
 
 }

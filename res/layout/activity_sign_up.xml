@@ -9,44 +9,46 @@
     tools:context=".SignUpActivity" >
 
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etFirstAndLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etUsername"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
-        android:hint="Username" >
+        android:layout_marginTop="69dp"
+        android:ems="10"
+        android:hint="Firstname Lastname" >
 
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etConfirmPassword"
+        android:layout_below="@+id/etFirstAndLastName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:onClick="onSignUp"
-        android:text="Sign Up" />
+        android:ems="10"
+        android:hint="Email" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etUsername"
         android:layout_centerHorizontal="true"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:layout_below="@+id/etUsername"
+        android:ems="10"
+        android:hint="Password"/>
 
-    <EditText
-        android:id="@+id/etConfirmPassword"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnSignUp"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etPassword"
         android:layout_centerHorizontal="true"
-        android:hint="Confirm Password"
-        android:inputType="textPassword" />
+        android:layout_marginTop="26dp"
+        android:onClick="onSignUp"
+        android:text="Sign Up" />
 
 </RelativeLayout>
