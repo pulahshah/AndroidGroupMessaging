@@ -19,5 +19,7 @@
     <string name="group_message_hint">Message</string>
     <string name="button_compose_cancel">Cancel</string>
     <string name="button_compose_create">Create</string>
+    <string name="title_activity_messages">MessagesActivity</string>
+    <string name="message_hint">What do you want to say?</string>
 
 </resources>

@@ -46,6 +46,10 @@
             android:name="com.example.groupmessaging.activities.CreateGroupActivity"
             android:label="@string/title_activity_conversation_compose" >
         </activity>
+        <activity
+            android:name="com.example.groupmessaging.activities.MessagesActivity"
+            android:label="@string/title_activity_messages" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.example.groupmessaging.models;
 
 public class Group {
 	private String name;
+	private String id;
 	private Message lastMessage;
 	
 	public String getName() {
@@ -19,5 +20,13 @@ public class Group {
 	
 	public void setLastMessage(Message lastMessage) {
 		this.lastMessage = lastMessage;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
