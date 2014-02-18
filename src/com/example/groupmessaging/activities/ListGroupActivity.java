@@ -14,6 +14,7 @@ import com.example.groupmessaging.R;
 import com.example.groupmessaging.adapters.GroupListAdapter;
 import com.example.groupmessaging.models.AccountManager;
 import com.example.groupmessaging.models.Group;
+import com.example.groupmessaging.restapi.GroupMessagingClient;
 
 public class ListGroupActivity extends Activity {
 	private static final String TAG = "ListGroupActivity";
@@ -38,6 +39,7 @@ public class ListGroupActivity extends Activity {
 	protected void showGroup(Group item) {
 		Intent i = new Intent(this, MessagesActivity.class);
 		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPID, item.getId());
+		i.putExtra(MessagesActivity.INTENT_PARAM_USERID, AccountManager.getInstance().getUserUniqueID());
 		startActivity(i);
 	}
 
@@ -51,7 +53,7 @@ public class ListGroupActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		adapter = new GroupListAdapter(android.R.layout.simple_list_item_1, this);
+		adapter = new GroupListAdapter(R.layout.list_item_group, this);
 		lvGroups.setAdapter(adapter);
 	}
 	
