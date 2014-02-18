@@ -1,7 +1,10 @@
 package com.example.groupmessaging.models;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+
 
 
 public class Group {
@@ -37,7 +40,7 @@ public class Group {
 		if (lastMessage == null)
 			return "";
 		
-		SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+		DateFormat df = DateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 		return df.format(new Date(lastMessage.getTimestamp()));
 	}
 }
