@@ -1,5 +1,11 @@
 package com.example.groupmessaging.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+
 
 public class Group {
 	private String name;
@@ -28,5 +34,13 @@ public class Group {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String formattedTimestamp() {
+		if (lastMessage == null)
+			return "";
+		
+		DateFormat df = DateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+		return df.format(new Date(lastMessage.getTimestamp()));
 	}
 }

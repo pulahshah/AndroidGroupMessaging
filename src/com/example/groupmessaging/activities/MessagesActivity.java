@@ -21,6 +21,7 @@ public class MessagesActivity extends Activity {
 	private EditText etNewMessage;
 	
 	public static final String INTENT_PARAM_GROUPID = "gid";
+	public static final String INTENT_PARAM_USERID = "uid";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class MessagesActivity extends Activity {
 		etNewMessage = (EditText)findViewById(R.id.etNewMessage);
 		
 		final String groupID = getIntent().getStringExtra(INTENT_PARAM_GROUPID);
-		adapter = new MessageListAdapter(groupID, this);
+		String userID = getIntent().getStringExtra(INTENT_PARAM_USERID);
+		adapter = new MessageListAdapter(groupID, userID, this);
 		
 		adapter.registerDataSetObserver(new DataSetObserver() {
 			@Override
@@ -58,8 +60,6 @@ public class MessagesActivity extends Activity {
 				return false;
 			}
 		});
-		
-
 	}
 
 	@Override

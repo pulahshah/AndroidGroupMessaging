@@ -29,6 +29,10 @@ public class AccountManager {
 		return currentUser;
 	}
 	
+	public String getUserUniqueID () {
+		return ("simplelogin:" + this.currentUser.getUserId());
+	}
+	
 	public static interface StartCallback {
 		public void onLoggedIn(User user);
 		public void onLoggedOut();
