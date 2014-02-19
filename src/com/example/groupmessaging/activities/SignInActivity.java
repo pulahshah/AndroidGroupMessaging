@@ -1,8 +1,11 @@
 package com.example.groupmessaging.activities;
 
-import android.R.bool;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +22,8 @@ import com.firebase.client.Firebase.AuthListener;
 import com.firebase.client.FirebaseError;
 import com.firebase.simplelogin.User;
 
+@SuppressLint("NewApi")
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SignInActivity extends Activity
 {
 	private static final String TAG = "SignInActivity";
@@ -35,6 +40,10 @@ public class SignInActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+        
         etUsername = (EditText)findViewById(R.id.etUsername);
         etPassword = (EditText)findViewById(R.id.etPassword);
         updateUserInfo = false;
