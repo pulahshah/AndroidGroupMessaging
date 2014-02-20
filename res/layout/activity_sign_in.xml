@@ -30,13 +30,14 @@
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:padding="15dp"
+                android:onClick="onSignUp"
                 android:text="Sign Up"/>
             
             <TextView 
                 android:id="@+id/tvExistingUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#A0A0A0"
+                android:textColor="@color/signin_selector"
                 android:layout_gravity="center"
                 android:paddingTop="20dp"
                 android:textSize="16sp"
