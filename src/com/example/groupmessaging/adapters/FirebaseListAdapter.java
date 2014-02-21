@@ -168,7 +168,8 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
             view = inflater.inflate(layout, viewGroup, false);
         }
 
-        T model = models.get(i);
+        @SuppressWarnings("unchecked")
+		T model = (T)getItem(i);
         // Call out to subclass to marshall this model into the provided view
         populateView(view, model);
         return view;

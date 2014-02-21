@@ -1,9 +1,7 @@
 package com.example.groupmessaging.adapters;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,15 +10,19 @@ import com.example.groupmessaging.models.Group;
 import com.example.groupmessaging.restapi.GroupMessagingClient;
 
 public class GroupListAdapter extends FirebaseListAdapter<Group> {
+	@SuppressWarnings("unused")
 	private static final String TAG = "GroupListAdapter";
-	private int layout;
-    private LayoutInflater inflater;
     
 	public GroupListAdapter(int layout,
 			Activity activity) {
 		super(GroupMessagingClient.getMyGroups(), Group.class, layout, activity);
 	}
 
+	@Override
+	public Object getItem(int i) {
+		return super.getItem(getCount() - i - 1);
+	}
+	
 	@Override
 	protected void populateView(View v, Group model) {
 		ImageView ivGroupImage = (ImageView)v.findViewById(R.id.ivGroupImage);
