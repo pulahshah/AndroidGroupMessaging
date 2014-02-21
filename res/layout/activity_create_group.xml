@@ -18,37 +18,25 @@
         android:singleLine="true" >
     </EditText>
 
-    <LinearLayout
+
+
+    <com.example.groupmessaging.view.ContactsCompletionView
+        android:id="@+id/mactvRecipients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
         
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To"
-            android:textSize="18sp"
-            />
+        android:hint="@string/group_participants_hint" />
 
-        <com.example.groupmessaging.view.ContactsCompletionView
-            android:id="@+id/mactvRecipients"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            
-            android:hint="@string/group_participants_hint" />
 
-        <ScrollView
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-        </ScrollView>
-    </LinearLayout>
-
-    <EditText
+        <EditText
         android:id="@+id/etMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/group_message_hint"
         android:inputType="textMultiLine"
         android:singleLine="false" />
-
+    </ScrollView>
 </LinearLayout>
