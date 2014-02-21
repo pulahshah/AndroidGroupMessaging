@@ -22,6 +22,7 @@ public class MessagesActivity extends Activity {
 	
 	public static final String INTENT_PARAM_GROUPID = "gid";
 	public static final String INTENT_PARAM_USERID = "uid";
+	public static final String INTENT_PARAM_GROUPNAME = "gname";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MessagesActivity extends Activity {
 		lvMessages = (ListView)findViewById(R.id.lvMessages);
 		etNewMessage = (EditText)findViewById(R.id.etNewMessage);
 		
+		setTitle(getIntent().getStringExtra(INTENT_PARAM_GROUPNAME));
 		final String groupID = getIntent().getStringExtra(INTENT_PARAM_GROUPID);
 		String userID = getIntent().getStringExtra(INTENT_PARAM_USERID);
 		adapter = new MessageListAdapter(groupID, userID, this);

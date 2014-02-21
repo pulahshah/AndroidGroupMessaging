@@ -41,6 +41,7 @@ public class ListGroupActivity extends Activity {
 		Intent i = new Intent(this, MessagesActivity.class);
 		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPID, item.getId());
 		i.putExtra(MessagesActivity.INTENT_PARAM_USERID, AccountManager.getInstance().getUserUniqueID());
+		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPNAME, item.getName());
 		startActivity(i);
 	}
 
