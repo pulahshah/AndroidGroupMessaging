@@ -44,11 +44,13 @@
         </activity>
         <activity
             android:name="com.example.groupmessaging.activities.CreateGroupActivity"
-            android:label="@string/title_activity_conversation_compose" >
+            android:label="@string/title_activity_conversation_compose" 
+            android:parentActivityName="com.example.groupmessaging.activities.ListGroupActivity">
         </activity>
         <activity
             android:name="com.example.groupmessaging.activities.MessagesActivity"
-            android:label="@string/title_activity_messages" >
+            android:label="@string/title_activity_messages" 
+            android:parentActivityName="com.example.groupmessaging.activities.ListGroupActivity">
         </activity>
     </application>
 

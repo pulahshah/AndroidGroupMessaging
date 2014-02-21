@@ -2,56 +2,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context=".CreateGroupActivity" >
-	
-	<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button android:id="@+id/btnCancel"
-            android:layout_alignParentLeft="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/button_compose_cancel"
-            android:onClick="onCancel"/>
-        <Button android:id="@+id/btnCreate"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/button_compose_create"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:onClick="onCreate"/>
-    </RelativeLayout>
-    
-    <EditText android:id="@+id/etGroupName"
+
+    <EditText
+        android:id="@+id/etGroupName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
         android:hint="@string/group_name_hint"
-        android:inputType="textEmailSubject">
+        android:inputType="textEmailSubject"
+        android:singleLine="true" >
     </EditText>
-    
-    <com.example.groupmessaging.view.ContactsCompletionView
-        android:id="@+id/mactvRecipients"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/group_participants_hint"/>
-    
-    <ScrollView android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        >
-        <EditText android:id="@+id/etMessage"
+        android:orientation="horizontal" >
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:textSize="18sp"
+            />
+
+        <com.example.groupmessaging.view.ContactsCompletionView
+            android:id="@+id/mactvRecipients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:singleLine="false"
-            android:hint="@string/group_message_hint"
-            />
-    </ScrollView>
+            
+            android:hint="@string/group_participants_hint" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ScrollView>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/group_message_hint"
+        android:inputType="textMultiLine"
+        android:singleLine="false" />
 
 </LinearLayout>

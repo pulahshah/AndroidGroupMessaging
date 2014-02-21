@@ -14,12 +14,12 @@
     <string name="action_new_group">New Group</string>
     <string name="title_activity_conversation_compose">New Conversation</string>
     <string name="action_settings">Settings</string>
-    <string name="group_name_hint">Name the group</string>
-    <string name="group_participants_hint">Who do you want in the group?</string>
-    <string name="group_message_hint">Message</string>
+    <string name="group_name_hint">Group name</string>
+    <string name="group_participants_hint"></string>
+    <string name="group_message_hint">Invitation message</string>
     <string name="button_compose_cancel">Cancel</string>
     <string name="button_compose_create">Create</string>
     <string name="title_activity_messages">MessagesActivity</string>
-    <string name="message_hint">What do you want to say?</string>
+    <string name="message_hint">Tap to chat</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.example.groupmessaging.adapters;
 
 import android.app.Activity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +13,9 @@ import com.example.groupmessaging.restapi.GroupMessagingClient;
 
 public class GroupListAdapter extends FirebaseListAdapter<Group> {
 	private static final String TAG = "GroupListAdapter";
-	
+	private int layout;
+    private LayoutInflater inflater;
+    
 	public GroupListAdapter(int layout,
 			Activity activity) {
 		super(GroupMessagingClient.getMyGroups(), Group.class, layout, activity);
