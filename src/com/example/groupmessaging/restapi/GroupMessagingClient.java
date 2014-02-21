@@ -15,6 +15,7 @@ import com.firebase.client.Firebase.AuthListener;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.GenericTypeIndicator;
 import com.firebase.client.Query;
+import com.firebase.client.ServerValue;
 import com.firebase.client.ValueEventListener;
 import com.firebase.simplelogin.User;
 
@@ -87,9 +88,13 @@ public class GroupMessagingClient {
 				
 				HashMap<String, Integer> members = snapshot.getValue(t);
 				
+				Object priority = ServerValue.TIMESTAMP;
+				
 				for (String user: members.keySet()) {
 					Firebase lastMessage = fbClient.child("users/" + user + "/groups/" + groupID + "/lastMessage");
 					lastMessage.setValue(newMessage);
+					Firebase group = fbClient.child("users/" + user + "/groups/" + groupID);
+					group.setPriority(priority);
 				}
 			}
 			
