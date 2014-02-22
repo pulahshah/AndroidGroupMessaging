@@ -3,7 +3,6 @@ package com.example.groupmessaging.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.example.groupmessaging.R;
 import com.example.groupmessaging.adapters.GroupListAdapter;
 import com.example.groupmessaging.models.AccountManager;
 import com.example.groupmessaging.models.Group;
-import com.example.groupmessaging.restapi.GroupMessagingClient;
 
 public class ListGroupActivity extends Activity {
 	private static final String TAG = "ListGroupActivity";
@@ -45,6 +43,7 @@ public class ListGroupActivity extends Activity {
 		i.putExtra(MessagesActivity.INTENT_PARAM_USERID, AccountManager.getInstance().getUserUniqueID());
 		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPNAME, item.getName());
 		startActivity(i);
+		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
 	}
 
 	@Override
@@ -75,5 +74,4 @@ public class ListGroupActivity extends Activity {
 		Intent i = new Intent(this, CreateGroupActivity.class);
 		startActivity(i);
 	}
-
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -79,5 +80,22 @@ public class MessagesActivity extends Activity {
 		getMenuInflater().inflate(R.menu.messages, menu);
 		return true;
 	}
-
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch(item.getItemId()) {
+		case android.R.id.home:
+			super.onMenuItemSelected(featureId, item);
+			this.finish();
+			overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+			return true;
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
 }
