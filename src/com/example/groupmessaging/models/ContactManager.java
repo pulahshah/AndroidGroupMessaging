@@ -41,18 +41,16 @@ public class ContactManager {
 			}
 		});
 		
-		Query ref1 = GroupMessagingClient.getMyUserInfo();
-		ref1.addValueEventListener(new ValueEventListener() {
+		getMyInfo(new InfoListener() {
 			
 			@Override
-			public void onDataChange(DataSnapshot snapshot) {
-				me = snapshot.getValue(Contact.class);
+			public void onSuccess(Contact me) {
+				ContactManager.this.me = me;
+				
 			}
 			
 			@Override
-			public void onCancelled(FirebaseError arg0) {
-				// TODO Auto-generated method stub
-				
+			public void onFailure(String message) {			
 			}
 		});
 	}
@@ -72,4 +70,25 @@ public class ContactManager {
 		return c.getFirstName();
 	}
 
+	public static interface InfoListener {
+		public void onSuccess(Contact me);
+		public void onFailure(String message);
+	}
+	
+	public void getMyInfo(final InfoListener listener) {
+		Query ref1 = GroupMessagingClient.getMyUserInfo();
+		ref1.addValueEventListener(new ValueEventListener() {
+			
+			@Override
+			public void onDataChange(DataSnapshot snapshot) {
+				Contact me = snapshot.getValue(Contact.class);
+				listener.onSuccess(me);
+			}
+			
+			@Override
+			public void onCancelled(FirebaseError arg0) {
+				
+			}
+		});		
+	}
 }

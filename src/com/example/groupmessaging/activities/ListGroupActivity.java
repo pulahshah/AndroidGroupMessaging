@@ -3,7 +3,6 @@ package com.example.groupmessaging.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +13,10 @@ import android.widget.ListView;
 import com.example.groupmessaging.R;
 import com.example.groupmessaging.adapters.GroupListAdapter;
 import com.example.groupmessaging.models.AccountManager;
+import com.example.groupmessaging.models.Contact;
+import com.example.groupmessaging.models.ContactManager;
+import com.example.groupmessaging.models.ContactManager.InfoListener;
 import com.example.groupmessaging.models.Group;
-import com.example.groupmessaging.restapi.GroupMessagingClient;
 
 public class ListGroupActivity extends Activity {
 	private static final String TAG = "ListGroupActivity";
@@ -27,6 +28,7 @@ public class ListGroupActivity extends Activity {
 		setContentView(R.layout.activity_list_group);
 		
 		setTitle(AccountManager.getInstance().getCurrentUser().getEmail());
+		updateTitleWithUserInfo();
 		lvGroups = (ListView)findViewById(R.id.lvGroups);
 		lvGroups.setOnItemClickListener(new OnItemClickListener() {
 
@@ -39,12 +41,29 @@ public class ListGroupActivity extends Activity {
 		});
 	}
 
+	private void updateTitleWithUserInfo() {
+		ContactManager.getInstance().getMyInfo(new InfoListener() {
+			
+			@Override
+			public void onSuccess(Contact me) {
+				setTitle(me.getFirstName() + " " + me.getLastName());
+				
+			}
+			
+			@Override
+			public void onFailure(String message) {
+				
+			}
+		});
+	}
+
 	protected void showGroup(Group item) {
 		Intent i = new Intent(this, MessagesActivity.class);
 		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPID, item.getId());
 		i.putExtra(MessagesActivity.INTENT_PARAM_USERID, AccountManager.getInstance().getUserUniqueID());
 		i.putExtra(MessagesActivity.INTENT_PARAM_GROUPNAME, item.getName());
 		startActivity(i);
+		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
 	}
 
 	@Override
@@ -75,5 +94,4 @@ public class ListGroupActivity extends Activity {
 		Intent i = new Intent(this, CreateGroupActivity.class);
 		startActivity(i);
 	}
-
 }
