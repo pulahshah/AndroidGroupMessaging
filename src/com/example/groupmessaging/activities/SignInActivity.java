@@ -19,6 +19,7 @@ import com.example.groupmessaging.models.AccountManager;
 import com.example.groupmessaging.models.AccountManager.LoginCallback;
 import com.example.groupmessaging.models.AccountManager.LoginError;
 import com.example.groupmessaging.models.AccountManager.StartCallback;
+import com.example.groupmessaging.models.ContactManager;
 import com.example.groupmessaging.restapi.GroupMessagingClient;
 import com.firebase.client.Firebase.AuthListener;
 import com.firebase.client.FirebaseError;
@@ -131,6 +132,7 @@ public class SignInActivity extends Activity
 			public void onAuthSuccess(Object arg0) {
 				if (updateUserInfo)
 					updateUserInfo();
+				ContactManager.getInstance();
 				showConversations();
 			}
 			
