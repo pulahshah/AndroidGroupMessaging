@@ -35,7 +35,7 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
     private Query ref;
     private Class<T> modelClass;
     private int layout;
-    private LayoutInflater inflater;
+    protected LayoutInflater inflater;
     private List<T> models;
     private Map<String, T> modelNames;
     private ChildEventListener listener;
@@ -164,14 +164,21 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        @SuppressWarnings("unchecked")
+		T model = (T)getItem(i);
+
+    	view = getViewFromLayout(layout, view, viewGroup, model);
+        // Call out to subclass to marshall this model into the provided view
+        populateView(view, model);
+        return view;
+    }
+    
+    protected View getViewFromLayout(int layout, View view, ViewGroup viewGroup, T model)
+    {
         if (view == null) {
             view = inflater.inflate(layout, viewGroup, false);
         }
 
-        @SuppressWarnings("unchecked")
-		T model = (T)getItem(i);
-        // Call out to subclass to marshall this model into the provided view
-        populateView(view, model);
         return view;
     }
 
