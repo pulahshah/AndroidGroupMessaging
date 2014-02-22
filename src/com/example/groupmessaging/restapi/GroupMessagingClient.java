@@ -113,6 +113,10 @@ public class GroupMessagingClient {
 		return fbClient.child("users/"+getUniqueId(currentUser)+"/private/contacts").startAt();
 	}
 	
+	public static Query getMyUserInfo() {
+		return fbClient.child("users/"+getUniqueId(currentUser)+"/private/userInfo");
+	}
+	
 	public static Query getMessagesForGroup(String groupID) {
 		return fbClient.child("groups/" + groupID + "/messages");
 	}
@@ -122,6 +126,7 @@ public class GroupMessagingClient {
 		HashMap<String, String> kv = new HashMap<String, String>();		
 		kv.put("firstName", firstName != null ? firstName : "");
 		kv.put("lastName", lastName != null ? lastName : "");
+		kv.put("id", getUniqueId(currentUser));
 		userInfo.setValue(kv);
 	}
 	

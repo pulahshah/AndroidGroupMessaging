@@ -25,6 +25,8 @@ public class ListGroupActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_group);
+		
+		setTitle(AccountManager.getInstance().getCurrentUser().getEmail());
 		lvGroups = (ListView)findViewById(R.id.lvGroups);
 		lvGroups.setOnItemClickListener(new OnItemClickListener() {
 
