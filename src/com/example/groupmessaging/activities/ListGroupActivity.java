@@ -13,6 +13,9 @@ import android.widget.ListView;
 import com.example.groupmessaging.R;
 import com.example.groupmessaging.adapters.GroupListAdapter;
 import com.example.groupmessaging.models.AccountManager;
+import com.example.groupmessaging.models.Contact;
+import com.example.groupmessaging.models.ContactManager;
+import com.example.groupmessaging.models.ContactManager.InfoListener;
 import com.example.groupmessaging.models.Group;
 
 public class ListGroupActivity extends Activity {
@@ -25,6 +28,7 @@ public class ListGroupActivity extends Activity {
 		setContentView(R.layout.activity_list_group);
 		
 		setTitle(AccountManager.getInstance().getCurrentUser().getEmail());
+		updateTitleWithUserInfo();
 		lvGroups = (ListView)findViewById(R.id.lvGroups);
 		lvGroups.setOnItemClickListener(new OnItemClickListener() {
 
@@ -34,6 +38,22 @@ public class ListGroupActivity extends Activity {
 				ListGroupActivity.this.showGroup((Group)adapter.getItem(position));
 			}
 			
+		});
+	}
+
+	private void updateTitleWithUserInfo() {
+		ContactManager.getInstance().getMyInfo(new InfoListener() {
+			
+			@Override
+			public void onSuccess(Contact me) {
+				setTitle(me.getFirstName() + " " + me.getLastName());
+				
+			}
+			
+			@Override
+			public void onFailure(String message) {
+				
+			}
 		});
 	}
 
