@@ -50,7 +50,6 @@ public class MessagesActivity extends Activity {
 				scrollMyListViewToBottom();
 			}
 		});
-		
 		lvMessages.setAdapter(adapter);
 	}
 	

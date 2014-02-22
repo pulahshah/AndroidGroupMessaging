@@ -3,7 +3,7 @@
     <item android:id="@+id/action_new_group"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/ic_action_compose"
+        android:icon="@drawable/ic_action_social_chat"
         android:title="@string/action_new_group"
         android:onClick="onActionNewGroup"/>
     
