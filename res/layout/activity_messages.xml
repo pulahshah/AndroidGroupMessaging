@@ -44,6 +44,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="0"
             android:contentDescription="Send"
+            android:onClick="sendMessage"
             android:src="@drawable/ic_action_send_dark" />
     </LinearLayout>
 
