@@ -43,4 +43,21 @@ public class Group {
 		DateFormat df = DateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 		return df.format(new Date(lastMessage.getTimestamp()));
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		if (other == this) return true;
+		if (other.getClass() != getClass()) return false;
+
+		Group otherGroup = (Group)other;
+		if (otherGroup.getId().equals(getId())) return true;
+		
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return getId().hashCode();
+	}
 }
