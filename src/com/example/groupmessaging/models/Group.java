@@ -51,6 +51,10 @@ public class Group {
 		if (other.getClass() != getClass()) return false;
 
 		Group otherGroup = (Group)other;
+		if (getId() == otherGroup.getId()) return true;
+		if (otherGroup.getId() == null) return false;
+		if (getId() == null) return false;
+			
 		if (otherGroup.getId().equals(getId())) return true;
 		
 		return false;
