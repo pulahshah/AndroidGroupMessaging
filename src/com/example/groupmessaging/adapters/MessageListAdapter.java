@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.groupmessaging.R;
 import com.example.groupmessaging.models.Contact;
+import com.example.groupmessaging.models.ContactManager;
 import com.example.groupmessaging.models.Message;
 import com.example.groupmessaging.restapi.GroupMessagingClient;
 import com.firebase.client.DataSnapshot;
@@ -91,7 +92,7 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 		tvMessageBody = (TextView) v.findViewById(R.id.tvMessageBody);
 		tvMessageTimestamp = (TextView) v.findViewById(R.id.tvMessageTimestamp);
 		
-		tvMessageSender.setText(message.getSender().toString());
+		tvMessageSender.setText(ContactManager.getInstance().getDisplayName(message.getSender().toString()));
 		tvMessageBody.setText(message.getText().toString());
 		
 		Date date = new Date(message.getTimestamp());
