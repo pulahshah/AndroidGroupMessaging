@@ -3,15 +3,10 @@ package com.example.groupmessaging.activities;
 import android.app.Activity;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.example.groupmessaging.R;

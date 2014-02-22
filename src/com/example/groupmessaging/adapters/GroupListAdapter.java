@@ -35,7 +35,7 @@ public class GroupListAdapter extends FirebaseListAdapter<Group> {
 		if (model != null) {
 			if (model.getLastMessage() != null) {
 				String senderId = model.getLastMessage().getSender();
-				tvMessageSnippet.setText(ContactManager.getInstance().getDisplayName(senderId) + ":" + model.getLastMessage().getText());
+				tvMessageSnippet.setText(ContactManager.getInstance().getDisplayName(senderId) + ": " + model.getLastMessage().getText());
 				tvLastMessageTimestamp.setText(model.formattedTimestamp());
 			}
 			tvGroupMembers.setText(model.getName());

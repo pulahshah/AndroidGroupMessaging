@@ -2,35 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="horizontal" >
-    <ImageView android:id="@+id/ivGroupImage"
+
+    <ImageView
+        android:id="@+id/ivGroupImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/batman" />
+
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight=".2"
-        android:layout_height="50dp"/>
-    <LinearLayout android:orientation="vertical"
-        android:layout_weight=".8"
         android:layout_height="wrap_content"
-        android:layout_width="0dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/tvGroupMembers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="18sp"
-             />
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:textColor="#292f33"
+            android:textSize="18sp" />
 
-        <TextView android:id="@+id/tvMessageSnippet"
+        <TextView
+            android:id="@+id/tvMessageSnippet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:textColor="#292f33"
+            android:textSize="14sp" />
     </LinearLayout>
-    <TextView android:id="@+id/tvLastMessageTimestamp" 
+
+    <TextView
+        android:id="@+id/tvLastMessageTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="23:59 pm"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        />
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#66757f" />
 
 </LinearLayout>
