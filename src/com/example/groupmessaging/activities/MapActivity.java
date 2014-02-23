@@ -69,8 +69,8 @@ public class MapActivity extends Activity {
 			Intent data = new Intent();
 			// Pass relevant data back as a result
 			if(tempLocation != null){
-				data.putExtra("lat", tempLocation.getLatitude()+"");
-				data.putExtra("lon", tempLocation.getLongitude()+"");
+				data.putExtra("lat", tempLocation.getLatitude());
+				data.putExtra("lon", tempLocation.getLongitude());
 			}
 			data.putExtra("locationSnapshot", localBytes);
 			// Activity finished ok, return the data
