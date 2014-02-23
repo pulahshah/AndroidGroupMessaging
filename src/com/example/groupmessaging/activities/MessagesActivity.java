@@ -121,24 +121,20 @@ public class MessagesActivity extends Activity {
 			Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 			Log.d("DEBUG", "Got result back from map activity: " + bmp.toString());
 			
-			String lat = data.getExtras().getString("lat");
-			String lon = data.getExtras().getString("lon");
-			String m = "Lat: " + lat + ", Lon: " + lon;
+			double lat = data.getExtras().getDouble("lat");
+			double lon = data.getExtras().getDouble("lon");
 			
-			sendLocationMessage(m);
+			sendLocationMessage(lat, lon);
 		}
 	}
 
 	
-	private void sendLocationMessage(String m) {
-		if (m != null && m.length() > 0) {
-			if(groupID != null){
-				GroupMessagingClient.sendMessage(groupID, m);
-				scrollMyListViewToBottom();
-				etNewMessage.setText("");
-			}
+	private void sendLocationMessage(double lat, double lon) {
+		if(groupID != null){
+			GroupMessagingClient.sendLocationMessage(groupID, lat, lon);
+			scrollMyListViewToBottom();
+			etNewMessage.setText("");
 		}
-		
 	} 
 
 }

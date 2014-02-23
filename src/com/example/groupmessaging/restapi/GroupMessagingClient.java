@@ -71,10 +71,19 @@ public class GroupMessagingClient {
 		return groupID;
 	}
 	
+	public static void sendLocationMessage(final String groupID, double lat, double lon) {
+		Message newMessage = new Message(getUniqueId(currentUser), String.valueOf(lat) + "," + String.valueOf(lon));
+		newMessage.setType(Message.LOCATION);
+		sendMessage(groupID, newMessage);
+	}
+	
 	public static void sendMessage(final String groupID, String message) {
+		Message newMessage = new Message(getUniqueId(currentUser), message);
+		sendMessage(groupID, newMessage);
+	}
+	
+	private static void sendMessage(final String groupID, final Message newMessage) {
 		Firebase messages = fbClient.child("groups/" + groupID + "/messages");
-		final Message newMessage = new Message(getUniqueId(currentUser), message);
-		
 		messages.push().setValue(newMessage);
 		
 		/* Get everyone in the group */
