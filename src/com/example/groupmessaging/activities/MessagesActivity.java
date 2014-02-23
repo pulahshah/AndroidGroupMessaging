@@ -1,8 +1,12 @@
 package com.example.groupmessaging.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,26 +22,28 @@ public class MessagesActivity extends Activity {
 	private ListView lvMessages;
 	private MessageListAdapter adapter;
 	private EditText etNewMessage;
-	
+
 	public static final String INTENT_PARAM_GROUPID = "gid";
 	public static final String INTENT_PARAM_USERID = "uid";
 	public static final String INTENT_PARAM_GROUPNAME = "gname";
-	
+
+	private final int REQUEST_CODE = 20;
+
 	String groupID = null;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_messages);
 		lvMessages = (ListView)findViewById(R.id.lvMessages);
 		etNewMessage = (EditText)findViewById(R.id.etNewMessage);
-		
+
 		setTitle(getIntent().getStringExtra(INTENT_PARAM_GROUPNAME));
 		groupID = getIntent().getStringExtra(INTENT_PARAM_GROUPID);
 		String userID = getIntent().getStringExtra(INTENT_PARAM_USERID);
 		adapter = new MessageListAdapter(groupID, userID, this);
-		
+
 		adapter.registerDataSetObserver(new DataSetObserver() {
 			@Override
 			public void onChanged() {
@@ -48,7 +54,7 @@ public class MessagesActivity extends Activity {
 		});
 		lvMessages.setAdapter(adapter);
 	}
-	
+
 	public void sendMessage(View v){
 		String message = etNewMessage.getText().toString();
 		if (message != null && message.length() > 0) {
@@ -62,17 +68,17 @@ public class MessagesActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "Empty", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-	
+
+
 	private void scrollMyListViewToBottom() {
-	    lvMessages.post(new Runnable() {
-	        @Override
-	        public void run() {
-	            lvMessages.setSelection(adapter.getCount() - 1);
-	        }
-	    });
+		lvMessages.post(new Runnable() {
+			@Override
+			public void run() {
+				lvMessages.setSelection(adapter.getCount() - 1);
+			}
+		});
 	}
-	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,16 +86,19 @@ public class MessagesActivity extends Activity {
 		getMenuInflater().inflate(R.menu.messages, menu);
 		return true;
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
 	}
-	
+
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch(item.getItemId()) {
+		case R.id.action_open_map:
+			openMap();
+			return true;
 		case android.R.id.home:
 			super.onMenuItemSelected(featureId, item);
 			this.finish();
@@ -98,4 +107,38 @@ public class MessagesActivity extends Activity {
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
+
+	private void openMap() {
+		Intent i = new Intent(this, MapActivity.class);
+		startActivityForResult(i, REQUEST_CODE);
+
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+			byte[] bytes = data.getByteArrayExtra("locationSnapshot");
+			Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+			Log.d("DEBUG", "Got result back from map activity: " + bmp.toString());
+			
+			String lat = data.getExtras().getString("lat");
+			String lon = data.getExtras().getString("lon");
+			String m = "Lat: " + lat + ", Lon: " + lon;
+			
+			sendLocationMessage(m);
+		}
+	}
+
+	
+	private void sendLocationMessage(String m) {
+		if (m != null && m.length() > 0) {
+			if(groupID != null){
+				GroupMessagingClient.sendMessage(groupID, m);
+				scrollMyListViewToBottom();
+				etNewMessage.setText("");
+			}
+		}
+		
+	} 
+
 }

@@ -20,5 +20,7 @@
     <string name="button_compose_create">Create</string>
     <string name="title_activity_messages">MessagesActivity</string>
     <string name="message_hint">Tap to chat</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
