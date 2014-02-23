@@ -94,11 +94,7 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 		
 		tvMessageSender.setText(ContactManager.getInstance().getDisplayName(message.getSender().toString()));
 		tvMessageBody.setText(message.getText().toString());
-		
-		Date date = new Date(message.getTimestamp());
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-		String dateFormatted = formatter.format(date);
-		tvMessageTimestamp.setText(dateFormatted);
+		tvMessageTimestamp.setText(message.formattedTimestamp());
 	}
 
 }

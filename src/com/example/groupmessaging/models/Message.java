@@ -1,6 +1,9 @@
 package com.example.groupmessaging.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Message {
 	private String sender;
@@ -40,6 +43,11 @@ public class Message {
 
 	public long getTimestamp() {
 		return timestamp;
+	}
+	
+	public String formattedTimestamp() {
+		DateFormat df = DateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+		return df.format(new Date(timestamp));
 	}
 
 	public void setTimestamp(long timestamp) {
