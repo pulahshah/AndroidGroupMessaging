@@ -1,11 +1,11 @@
 package com.example.groupmessaging.adapters;
 
-import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import android.app.Activity;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -94,7 +94,12 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 		
 		tvMessageSender.setText(ContactManager.getInstance().getDisplayName(message.getSender().toString()));
 		tvMessageBody.setText(message.getText().toString());
-		tvMessageTimestamp.setText(message.formattedTimestamp());
+		tvMessageTimestamp.setText(getFormattedTimeStamp(message.getTimestamp()));
+	}
+	
+	private String getFormattedTimeStamp(long timestamp) {
+			DateFormat df = DateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+			return df.format(new Date(timestamp));
 	}
 
 }
