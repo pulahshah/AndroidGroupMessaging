@@ -18,20 +18,17 @@
             android:layout_height="wrap_content"
             android:background="#e1e8ed"
             android:orientation="vertical"
-            android:layout_gravity="right"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            
             android:paddingTop="5dp" >
 
-            <TextView
-                android:id="@+id/tvMessageBody"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:textColor="#292f33"
-                android:textSize="16sp" />
+            <com.loopj.android.image.SmartImageView
+    			android:id="@+id/ivLocationMessage" 
+    			android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:background="@drawable/blank_map"/>
+            
         </LinearLayout>
 
         <TextView
@@ -40,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:fontFamily="sans-serif-light"
-            android:textColor="#8899a6" />
+            android:textColor="#FF0000" />
     </LinearLayout>
 
 </LinearLayout>

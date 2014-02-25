@@ -141,7 +141,7 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	public void onConnected(Bundle dataBundle) {
 		// Display the connection status
-		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 		Location location = mLocationClient.getLastLocation();
 		if (location != null) {
 			LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());

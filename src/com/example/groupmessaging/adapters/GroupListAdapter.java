@@ -2,7 +2,6 @@ package com.example.groupmessaging.adapters;
 
 import android.app.Activity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,7 +37,22 @@ public class GroupListAdapter extends FirebaseListAdapter<Group> {
 				tvMessageSnippet.setText(ContactManager.getInstance().getDisplayName(senderId) + ": " + model.getLastMessage().getText());
 				tvLastMessageTimestamp.setText(model.formattedTimestamp());
 			}
-			tvGroupMembers.setText(model.getName());
+			
+			String groupName = model.getName();
+			tvGroupMembers.setText(groupName);
+			
+			if(groupName.equals("Awesome UI")){
+				ivGroupImage.setBackgroundResource(R.drawable.profile);
+			}
+			else if(groupName.equals("Another Class Group")){
+				ivGroupImage.setBackgroundResource(R.drawable.profile1);
+			}
+			else if(groupName.equals("Group")){
+				ivGroupImage.setBackgroundResource(R.drawable.profile2);
+			}
+			else{
+				ivGroupImage.setBackgroundResource(R.drawable.batman);
+			}
 		}
 	}
 
