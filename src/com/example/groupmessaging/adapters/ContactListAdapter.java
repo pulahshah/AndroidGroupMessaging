@@ -34,8 +34,10 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 				
 				Map<String, Contact> contacts = snapshot.getValue(t);
 				
-				for (Contact c: contacts.values()) {
-					add(c);
+				if (contacts != null) {
+					for (Contact c: contacts.values()) {
+						add(c);
+					}
 				}
 			}
 			
