@@ -62,6 +62,9 @@ public class ContactManager {
 		if (me != null && me.getId().equals(userId))
 			return "You";
 		
+		if (contacts == null)
+			return userId;
+		
 		Contact c = contacts.get(userId);
 		
 		if (c == null)
