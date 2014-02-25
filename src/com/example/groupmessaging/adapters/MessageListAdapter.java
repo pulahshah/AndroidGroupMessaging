@@ -84,6 +84,7 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 			}
 			else{
 				if(message.getType() == Integer.valueOf(1)){	// location
+					Log.d("DEBUG", "received location: " + message.getText());
 					view = inflater.inflate(R.layout.message_other_location, viewGroup, false);
 				}
 				else{											// text

@@ -125,6 +125,7 @@ public class MessagesActivity extends Activity {
 			double lon = data.getExtras().getDouble("lon");
 			
 			sendLocationMessage(lat, lon);
+			scrollMyListViewToBottom();
 		}
 	}
 
@@ -132,7 +133,6 @@ public class MessagesActivity extends Activity {
 	private void sendLocationMessage(double lat, double lon) {
 		if(groupID != null){
 			GroupMessagingClient.sendLocationMessage(groupID, lat, lon);
-			scrollMyListViewToBottom();
 			etNewMessage.setText("");
 		}
 	} 
