@@ -38,7 +38,11 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 	private SmartImageView ivImage;
 
 
-
+	private static final int TAG_MY_MESSAGE = 0;
+	private static final int TAG_MY_LOCATION = 1;
+	private static final int TAG_OTHER_MESSAGE = 2;
+	private static final int TAG_OTHER_LOCATION = 3;
+	
 	public MessageListAdapter(String groupID, String userID,
 			Activity activity) {
 		super(GroupMessagingClient.getMessagesForGroup(groupID), Message.class, android.R.layout.simple_list_item_1, activity);
@@ -70,43 +74,72 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 	protected View getViewFromLayout(int layout, View view, ViewGroup viewGroup, Message message) {
 		String sender = message.getSender();
 
-		//TODO: do not enforce null 
-		view = null;
-
-		if(view == null){
-			if(sender.equals(userID)){
-				if(message.getType() == Integer.valueOf(1)){	// location
-					view = inflater.inflate(R.layout.message_me_location, viewGroup, false);
-				}
-				else{											// text
-					view = inflater.inflate(R.layout.message_me, viewGroup, false);
-				}
-			}
-			else{
-				if(message.getType() == Integer.valueOf(1)){	// location
-					Log.d("DEBUG", "received location: " + message.getText());
-					view = inflater.inflate(R.layout.message_other_location, viewGroup, false);
-				}
-				else{											// text
-					view = inflater.inflate(R.layout.message_others, viewGroup, false);
-				}
-			}
-		}
-
 		/*
-		if (view == null) {
-			//check if message from me or other
-			if(sender.equals(userID)){
-				view = inflater.inflate(R.layout.message_me, viewGroup, false);
-				view.setTag(Integer.valueOf(0));
-
+		if(sender.equals(userID)){
+			if(message.getType() == Integer.valueOf(1)){	// location
+				view = inflater.inflate(R.layout.message_me_location, viewGroup, false);
 			}
-			else{
-				view = inflater.inflate(R.layout.message_others, viewGroup, false);
-				view.setTag(Integer.valueOf(1));
+			else{											// text
+				view = inflater.inflate(R.layout.message_me, viewGroup, false);
 			}
 		}
 		else{
+			if(message.getType() == Integer.valueOf(1)){	// location
+				Log.d("DEBUG", "received location: " + message.getText());
+				view = inflater.inflate(R.layout.message_other_location, viewGroup, false);
+			}
+			else{											// text
+				view = inflater.inflate(R.layout.message_others, viewGroup, false);
+			}
+		}
+		*/
+		
+		if (view == null) {
+			//check if message from me or other
+			if(sender.equals(userID)){				
+				if (message.getType() == Message.MESSAGE) {
+					view = inflater.inflate(R.layout.message_me, viewGroup, false);
+					view.setTag(Integer.valueOf(TAG_MY_MESSAGE));
+				} else {
+					view = inflater.inflate(R.layout.message_me_location, viewGroup, false);
+					view.setTag(Integer.valueOf(TAG_MY_LOCATION));
+				}
+			} else {
+				if (message.getType() == Message.MESSAGE) {
+					view = inflater.inflate(R.layout.message_others, viewGroup, false);
+					view.setTag(Integer.valueOf(TAG_OTHER_MESSAGE));
+				} else {
+					view = inflater.inflate(R.layout.message_other_location, viewGroup, false);
+					view.setTag(Integer.valueOf(TAG_OTHER_LOCATION));
+				}
+			}
+		} else {
+			if(sender.equals(userID)){				
+				if (message.getType() == Message.MESSAGE) {
+					if (!view.getTag().equals(Integer.valueOf(TAG_MY_MESSAGE))) {
+						view = inflater.inflate(R.layout.message_me, viewGroup, false);
+						view.setTag(Integer.valueOf(TAG_MY_MESSAGE));
+					}
+				} else {
+					if (!view.getTag().equals(Integer.valueOf(TAG_MY_LOCATION))) {
+						view = inflater.inflate(R.layout.message_me_location, viewGroup, false);
+						view.setTag(Integer.valueOf(TAG_MY_LOCATION));
+					}
+				}
+			} else {
+				if (message.getType() == Message.MESSAGE) {
+					if (!view.getTag().equals(Integer.valueOf(TAG_OTHER_MESSAGE))) {
+						view = inflater.inflate(R.layout.message_others, viewGroup, false);
+						view.setTag(Integer.valueOf(TAG_OTHER_MESSAGE));
+					}
+				} else {
+					if (!view.getTag().equals(Integer.valueOf(TAG_OTHER_LOCATION))) {
+						view = inflater.inflate(R.layout.message_other_location, viewGroup, false);
+						view.setTag(Integer.valueOf(TAG_OTHER_LOCATION));
+					}
+				}
+			}
+			/*
 			if(view.getTag().equals(Integer.valueOf(0)) && !sender.equals(userID)){
 				view = inflater.inflate(R.layout.message_others, viewGroup, false);
 				view.setTag(Integer.valueOf(1));
@@ -116,8 +149,9 @@ public class MessageListAdapter extends FirebaseListAdapter<Message> {
 				view = inflater.inflate(R.layout.message_me, viewGroup, false);
 				view.setTag(Integer.valueOf(0));
 			}
+			*/
 		}
-		 */
+		
 		return view;
 	}
 
