@@ -41,13 +41,13 @@ public class GroupListAdapter extends FirebaseListAdapter<Group> {
 			String groupName = model.getName();
 			tvGroupMembers.setText(groupName);
 			
-			if(groupName.equals("Awesome UI")){
+			if(groupName.equals("Hike tomorrow")){
 				ivGroupImage.setBackgroundResource(R.drawable.profile);
 			}
-			else if(groupName.equals("Another Class Group")){
+			else if(groupName.equals("soccer")){
 				ivGroupImage.setBackgroundResource(R.drawable.profile1);
 			}
-			else if(groupName.equals("Group")){
+			else if(groupName.equals("Demo")){
 				ivGroupImage.setBackgroundResource(R.drawable.profile2);
 			}
 			else{
