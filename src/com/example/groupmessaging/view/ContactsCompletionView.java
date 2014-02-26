@@ -18,17 +18,8 @@ import com.tokenautocomplete.TokenCompleteTextView;
 
 public class ContactsCompletionView extends TokenCompleteTextView {
 
-	public ContactsCompletionView(Context context) {
-		super(context);
-	}
-
 	public ContactsCompletionView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-	}
-
-	public ContactsCompletionView(Context context, AttributeSet attrs,
-			int defStyle) {
-		super(context, attrs, defStyle);
 	}
 	
 	@Override
